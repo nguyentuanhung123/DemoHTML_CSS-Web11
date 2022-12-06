@@ -1,0 +1,14 @@
+.input {
+  height: 36px;
+  outline: none;
+  border: 1px solid #e0e1e4;
+}
+
+.input-icon {
+  background-image: url(../../assets//Icons/Ic_seerch.png);
+  background-repeat: no-repeat;
+  background-position-y: center;
+  background-position-x: 12px;
+  padding-left: 36px;
+  padding-right: 16px;
+}

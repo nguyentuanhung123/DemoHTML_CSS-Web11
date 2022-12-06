@@ -1,0 +1,26 @@
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: rgb(228, 139, 22); */
+}
+
+.page__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: blue; */
+}
+
+.page__title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.page__container {
+  margin-top: 16px;
+  width: 100%;
+  height: calc(100% - 36px);
+  /* background-color: brown; */
+}

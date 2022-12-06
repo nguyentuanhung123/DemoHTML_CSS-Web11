@@ -1,0 +1,39 @@
+.btn {
+  height: 36px;
+  min-width: 75px;
+  border-radius: 4px;
+  border: unset;
+  color: #fff;
+}
+
+.btn--default {
+  background-color: #50b83c;
+}
+
+.btn--error {
+  background-color: #f80d0d;
+}
+
+.btn--refresh {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #50b83c;
+  border-radius: 4px;
+  background-image: url(../../assets/Icons/ic_refesh.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+}
+
+.btn-icon {
+  background-repeat: no-repeat;
+  background-position-x: 12px;
+  background-position-y: center;
+  background-size: 24px 24px;
+  padding-left: 36px; /*8px(kc giữa text và icon) + 16px(độ rộng của icon) + 12px(mép trái của icon trong button)*/
+  padding-right: 16px;
+}
+
+.btn-icon--add-employee {
+  background-image: url(../../assets/Icons/ic_Filter.png);
+}
