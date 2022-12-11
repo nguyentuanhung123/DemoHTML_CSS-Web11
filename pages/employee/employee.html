@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../css/base/popup.css">
     <title>Document</title>
     <script src="/js/jquery-3.6.1.min.js"></script>
 </head>
@@ -46,7 +47,7 @@
                 <div class="page__header">
                     <div class="page__title">Danh sách nhân viên</div>
                     <div class="page__button">
-                        <button class="btn btn--default btn-icon btn-icon--add-employee">Thêm mới</button>
+                        <button onclick="btnAddOnClick()" id="btn-add" class="btn bg--green btn-icon btn-icon--add-employee">Thêm mới</button>
                     </div>
                 </div>
                 <div class="page__container">
@@ -206,6 +207,209 @@
                         <div class="table__paging">table__paging</div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông tin chi tiết nhân viên-->
+    <div id="popup-employee-detail" class="popup">
+        <div class="popup-container">
+            <div id="btn-close" class="popup__button">
+                <img src="../../assets/Icons/ic_X.png" alt="">
+            </div>
+            <div class="popup__header">
+                <div class="popup__title">
+                    Thông tin nhân viên
+                </div>
+            </div>
+            <div id="popup-detail" class="popup__content">
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="m-row">
+                            <div class="m-col">
+                                <div class="input-wrapper" style="width : 175px">
+                                    <label class="input__label" for="txtEmployeeCode">Mã nhân viên <span class="required">*</span></label>
+                                    <input id="txtEmployeeCode" type="text" class="input">
+                                    <div class="error-text" hidden>
+                                        Mã nhân viên không được để trống
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-col flex-1">
+                                <div class="input-wrapper">
+                                    <label class="input__label" for="txtEmployeeName">Họ và tên <span class="required">*</span></label>
+                                    <input id="txtEmployeeName" type="text" class="input">
+                                    <div class="error-text" hidden>
+                                        Họ và tên không được để trống
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-row">
+                            <div class="m-col w-100">
+                                <div class="input-wrapper">
+                                    <label class="input__label">Đơn vị <span class="required">*</span>:</label>
+                                    <select class="combobox" name="department" id="cbxDepartment">
+                                        <option value="">-- Chọn phòng ban --</option>
+                                        <option value="142cb08f-7c31-21fa-8e90-67245e8b283e">Phòng nhân sự</option>
+                                        <option value="17120d02-6ab5-3e43-18cb-66948daf6128">Phòng tuyển sinh</option>
+                                        <option value="469b3ece-744a-45d5-957d-e8c757976496">Phòng sản xuất</option>
+                                        <option value="4e272fc4-7875-78d6-7d32-6a1673ffca7c">Phòng đào tạo</option>
+                                    </select>
+                                    <div class="error-text" hidden>
+                                        Đơn vị không được để trống
+                                    </div> 
+                                </div>                        
+                            </div>
+                        </div>
+                        <div class="m-row">
+                            <div class="m-col w-100">
+                                <div class="input-wrapper">
+                                    <label class="input__label">Chức danh:</label>
+                                    <input id="txtPositionName" type="text" class="input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="m-row">
+                            <div class="m-col">
+                                <div class="input-wrapper">
+                                    <label class="input__label" for="dtDateOfBirth">Ngày sinh:</label>
+                                    <input id="dtDateOfBirth" type="date" class="input">
+                                </div>
+                            </div>
+                            <div class="m-col">
+                                <div class="radio-wrapper">
+                                    <label for="txtEmployeeCode" class="input__label">Giới tính:</label>
+                                    <div class="radio-data flex">
+                                        <div class="radio-item">
+                                            <input id="gender--male" type="radio" class="radio" value="0" name="gender">
+                                            <label for="gender--male">Nam</label>
+                                        </div>
+                                        <div class="radio-item">
+                                            <input id="gender--female" type="radio" class="radio" value="1" name="gender">
+                                            <label for="gender--female">Nữ</label>
+                                        </div>
+                                        <div class="radio-item">
+                                            <input id="gender--other" type="radio" class="radio" value="2" name="gender">
+                                            <label for="gender--other">Khác</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-row">
+                            <div class="m-col w-100">
+                                <div class="input-wrapper">
+                                    <label class="input__label" for="txtIdentityNumber" title="Số chứng minh thư nhân dân">Số CMTND:</label>
+                                    <input type="text" class="input">
+                                </div>
+                            </div>
+                            <div class="m-col w-100">
+                                <div class="input-wrapper">
+                                    <label class="input__label" for="txtIdentityNumber">Ngày cấp</label>
+                                    <input type="text" class="input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-row">
+                            <div class="m-col w-100">
+                                <div class="input-wrapper">
+                                    <label class="input__label" for="txtIdentityAddress">Nơi cấp</label>
+                                    <input type="text" class="input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="m-row">
+                        <div class="m-col w-100">
+                            <div class="input-wrapper">
+                                <label for="txtAddress" class="input__label">Địa chỉ:</label>
+                                <input type="text" class="input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="m-row">
+                        <div class="m-col">
+                            <div class="input-wrapper">
+                                <label class="input__label" title="Số điện thoại di động">ĐT di động : </label>
+                                <input id="txtPhoneNumber" type="text" class="input">
+                            </div>
+                        </div>
+                        <div class="m-col">
+                            <div class="input-wrapper">
+                                <label class="input__label" title="Số điện thoại cố định">ĐT cố định : </label>
+                                <input id="txtTelephoneNumber" type="text" class="input">
+                            </div>
+                        </div>
+                        <div class="m-col">
+                            <div class="input-wrapper">
+                                <label class="input__label" title="Email">Email : </label>
+                                <input id="txtEmail" type="text" class="input">
+                                <div class="error-text" hidden>
+                                    Email không đúng định dạng
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-row">
+                        <div class="m-col">
+                            <div class="input-wrapper">
+                                <label class="input__label" title="Tài khoản ngân hàng">Tài khoản ngân hàng  : </label>
+                                <input type="text" class="input">
+                            </div>
+                        </div>
+                        <div class="m-col">
+                            <div class="input-wrapper">
+                                <label class="input__label" title="Tên ngân hàng">Tên ngân hàng : </label>
+                                <input type="text" class="input">
+                            </div>
+                        </div>
+                        <div class="m-col">
+                            <div class="input-wrapper">
+                                <label class="input__label" title="Chi nhánh">Chi nhánh : </label>
+                                <input type="text" class="input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup__footer">
+                <div class="footer__right">
+                    <button id="btn-save" class="btn btn--default bg--green">Cất</button>
+                    <button id="btn-saveadd" class="btn btn--default border--gray">Cất và Thêm</button>
+                </div>
+                <div class="footer__left">
+                    <button id="btn-cancel" class="btn btn--default border--gray">Huỷ bỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Thông báo-->
+    <div id="dialog-notice" class="dialog">
+        <div class="dialog-container">
+            <div class="dialog__button">
+                <img class="icofont-close" src="../../assets/Icons/ic_X_2.png" alt="">
+            </div>
+            <div class="dialog__header">
+                <div class="dialog__title">
+                    Dữ liệu không hợp lệ
+                </div>
+            </div>
+            <div class="dialog__content">
+                <li>Mã nhân viên không hợp lệ.</li>
+                <li>Ngày sinh không được lớn hơn ngày hiện tại.</li>
+                <li>Email không đúng định dạng.</li>
+            </div>
+            <div class="dialog__footer">
+                <button  class="btn btn--default bg--green dialog__button--accept">Đồng ý</button>
+                <!-- <button class="btn btn--default border--gray">Huỷ bỏ</button> -->
             </div>
         </div>
     </div>

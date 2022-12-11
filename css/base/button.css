@@ -4,10 +4,12 @@
   border-radius: 4px;
   border: unset;
   color: #fff;
+  cursor: pointer;
 }
 
 .btn--default {
-  background-color: #50b83c;
+  background-color: #fff;
+  color: #000;
 }
 
 .btn--error {
@@ -36,4 +38,24 @@
 
 .btn-icon--add-employee {
   background-image: url(../../assets/Icons/ic_Filter.png);
+}
+
+#btn-save {
+  order: 2;
+}
+
+#btn-saveadd {
+  background-color: #fff;
+  color: #000;
+  order: 1;
+}
+
+#btn-cancel {
+  background-color: #fff;
+  color: #000;
+}
+
+.bg--green {
+  background-color: #089740;
+  color: #fff;
 }

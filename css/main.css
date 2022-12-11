@@ -4,6 +4,9 @@
 @import url(./base/button.css);
 @import url(./base/table.css);
 @import url(./base/input.css);
+@import url(./base/popup.css);
+@import url(./base/dialog.css);
+@import url(./base/combobox.css);
 
 body {
   margin: 0;
@@ -51,4 +54,48 @@ body {
 
 .text-align--center {
   text-align: center;
+}
+
+.required {
+  color: #f00;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-row + .form-row {
+  margin-top: 14px;
+}
+
+.flex {
+  display: flex;
+}
+
+.form-group,
+.flex-1 {
+  flex: 1;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.m-row + .m-row {
+  margin-top: 14px;
+}
+
+.m-row {
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.m-row > .m-col {
+  padding: 0 6px;
+}
+
+.border--gray {
+  border: 1px solid #cecece;
 }
