@@ -47,7 +47,7 @@ function loadData() {
         var statusCode = error.status;
         switch (statusCode) {
           case 400:
-            var errorMsg = error.response.userMsg;
+            var errorMsg = error.responseJSON.userMsg;
             alert(errorMsg);
             break;
 
@@ -74,20 +74,63 @@ function createEvent() {
     $("#btn-add").click(btnAddOnClick);
     $("#btn-close").click(btnCloseOnClick);
     $("#btn-save").click(btnSaveOnClick);
+    $("[m-required]").blur(onValidateFieldRequired);
 
     //dialog close
     $(".icofont-close").click(btnDialogCloseOnClick);
-    $("#dialog-notice button.dialog__button--accept").click(function () {
-      $("#dialog-notice").hide();
-      if (fieldErrors.length > 0) {
-        //Set focus vào ô lỗi đầu tiên
-        fieldErrors[0].focus();
-        for (const field of fieldErrors) {
-          field.addClass("field--error");
-        }
+    $("#dialog-notice button.dialog__button--accept").click(
+      btnConfirmErrorDialog
+    );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function onValidateFieldRequired() {
+  try {
+    var value = this.value;
+    var label = $(this).attr("field-label");
+    if (value.trim() == "" || value == null || value == undefined) {
+      this.classList.add("field--error");
+      var errorTextEls = $(this).siblings(".error-text");
+      if (errorTextEls.length == 0) {
+        var errorElHTML = `<div class="error-text" hidden>
+                            ${label} không được để trống
+                          </div> `;
+        $(this).after(errorElHTML);
       }
-    });
-  } catch (error) {}
+    } else {
+      this.classList.remove("field--error");
+      $(this).siblings(".error-text").remove();
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/**
+ *
+ */
+function btnConfirmErrorDialog() {
+  try {
+    $("#dialog-notice").hide();
+    if (fieldErrors.length > 0) {
+      //Set focus vào ô lỗi đầu tiên
+      fieldErrors[0].focus();
+      for (const field of fieldErrors) {
+        //add style lỗi :
+        field.classList.add("field--error");
+        var fieldLabel = $(field).attr("field-label");
+        //Bổ sung element thông tin lỗi sau input:
+        var errorElHTML = `<div class="error-text" hidden>
+                                ${fieldLabel} không được để trống
+                            </div> `;
+        $(field).after(errorElHTML);
+      }
+    }
+  } catch (eror) {
+    console.log(error);
+  }
 }
 
 // 1 Bấm vào nút thêm thì hiển thi dialog nhập thông tin chi tiết
@@ -156,72 +199,36 @@ function btnDialogCloseOnClick() {
 function btnSaveOnClick() {
   try {
     //1. thu thập dữ liệu trên form:
-    const employeeCode = $("#txtEmployeeCode").val(); //-->bắt buộc
-    const employeeName = $("#txtEmployeeName").val(); //-->bắt buộc
-    const gender = $("input[name='gender']:checked").val();
-    const dob = $("#dtDateOfBirth").val(); //--> Không được lớn hơn ngày hiện tại
-    const departmentId = $("#cbxDepartment").val(); //-->bắt buộc
-    const email = $("#txtEmail").val(); //-->Cần đúng định dạng
-    const phoneNumber = $("#txtPhoneNumber").val();
-    const telephoneNumber = $("#txtTelephoneNumber").val();
+    // const employeeCode = $("#txtEmployeeCode").val(); //-->bắt buộc
+    // const employeeName = $("#txtEmployeeName").val(); //-->bắt buộc
+    // const gender = $("input[name='gender']:checked").val();
+    // const dob = $("#dtDateOfBirth").val(); //--> Không được lớn hơn ngày hiện tại
+    // const departmentId = $("#cbxDepartment").val(); //-->bắt buộc
+    // const email = $("#txtEmail").val(); //-->Cần đúng định dạng
+    // const phoneNumber = $("#txtPhoneNumber").val();
+    // const telephoneNumber = $("#txtTelephoneNumber").val();
 
+    //Lấy ra tất cả các field có attribute là property-name:
+    let fields = $("[property-name]");
+    let employee = {};
+    //Duyệt các fields:
+    for (const field of fields) {
+      //Lấy ra value:
+      const value = field.value; //const value = $(field).val() -- jquery
+      const propertyName = $(field).attr("property-name");
+      employee[propertyName] = value; //gán giá trị vừa nhập vào property-name
+    }
     let errorMsgs = [];
     fieldErrors = [];
-    //2. kiểm tra dữ liệu:
-    // - Dữ liệu bắt buộc đã nhập chưa ?
-
-    // - Dữ liệu đã đúng định dạng chưa ?
-
-    // - Các dữ liệu ngày tháng đã chính xác (ex: ngày sinh không được lớn hơn ngày hiện tại)
-
-    //Mã không được để trống
-    if (
-      employeeCode.toString().trim() == "" ||
-      employeeCode == null ||
-      employeeCode == undefined
-    ) {
-      // alert("Mã nhân viên không được phép để trống.");
-      errorMsgs.push("Mã nhân viên không được phép để trống.");
-      // $("#txtEmployeeCode").addClass("input--error");
-      fieldErrors.push($("#txtEmployeeCode"));
-    } else {
-      $("#txtEmployeeCode").removeClass("input--error");
-    }
-
-    //Họ tên không được để trống
-    if (
-      employeeName.toString().trim() == "" ||
-      employeeName == null ||
-      employeeName == undefined
-    ) {
-      errorMsgs.push("Họ tên nhân viên không được phép để trống.");
-      // $("#txtEmployeeName").addClass("input--error");
-      fieldErrors.push($("#txtEmployeeName"));
-    } else {
-      $("#txtEmployeeName").removeClass("input--error");
-    }
-
-    //Đơn vị không được để trống
-    if (
-      departmentId.toString().trim() == "" ||
-      departmentId == null ||
-      departmentId == undefined
-    ) {
-      errorMsgs.push("Đơn vị không được để trống.");
-      // $("#cbxDepartment").addClass("field--error");
-      fieldErrors.push($("#cbxDepartment"));
-    } else {
-      $("#cbxDepartment").removeClass("field--error");
-    }
-
-    //Kiểm tra email đúng định dạng
-    const isValidEmail = validateEmail(email);
-    if (!isValidEmail) {
-      errorMsgs.push("Email không đúng định dạng.");
-      // $("#txtEmail").addClass("field--error");
-      fieldErrors.push($("#txtEmail"));
-    } else {
-      $("#txtEmail").removeClass("field--error");
+    //Lấy ra tất cả các trường bắt buộc:
+    var fieldRequireds = $("[m-required]");
+    for (const field of fieldRequireds) {
+      const value = field.value; //$(field).val();
+      const fieldLabel = $(field).attr("field-label");
+      if (value.trim() == "" || value == null || value == undefined) {
+        errorMsgs.push(`${fieldLabel} không được để trống`);
+        fieldErrors.push(field);
+      }
     }
 
     //Kiểm tra errorMsg xem có lỗi không ?
@@ -237,15 +244,36 @@ function btnSaveOnClick() {
       // -- Hiển thị:
       // dialogNotice.show();
       document.getElementById("dialog-notice").style.display = "flex";
+      return;
     }
 
     //3. Gọi API cất dữ liệu
     $.ajax({
       type: "POST",
       url: "https://amis.manhnv.net/api/v1/Employees",
-      data: "data",
-      dataType: "dataType",
-      success: function (response) {},
+      data: JSON.stringify(employee),
+      dataType: "json",
+      contentType: "application/json",
+      success: function (response) {
+        alert("Thêm thành công");
+      },
+      error: function (error) {
+        alert("Lỗi !!!!!!!!!!!!");
+        console.log(error);
+        var statusCode = error.status;
+        switch (statusCode) {
+          case 400:
+            var errorMsg = error.responseJSON.userMsg;
+            alert(errorMsg);
+            break;
+
+          case 500:
+            break;
+
+          default:
+            break;
+        }
+      },
     });
 
     //4. Xử lý thông tin từ API trả về:

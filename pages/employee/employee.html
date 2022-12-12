@@ -228,20 +228,20 @@
                         <div class="m-row">
                             <div class="m-col">
                                 <div class="input-wrapper" style="width : 175px">
-                                    <label class="input__label" for="txtEmployeeCode">Mã nhân viên <span class="required">*</span></label>
-                                    <input id="txtEmployeeCode" type="text" class="input">
-                                    <div class="error-text" hidden>
+                                    <label class="input__label" for="txtEmployeeCode">Mã nhân viên <span class="required">*</span>:</label>
+                                    <input id="txtEmployeeCode" property-name="EmployeeCode" m-required field-label="Mã nhân viên" type="text" class="input">
+                                    <!-- <div class="error-text" hidden>
                                         Mã nhân viên không được để trống
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="m-col flex-1">
                                 <div class="input-wrapper">
-                                    <label class="input__label" for="txtEmployeeName">Họ và tên <span class="required">*</span></label>
-                                    <input id="txtEmployeeName" type="text" class="input">
-                                    <div class="error-text" hidden>
+                                    <label class="input__label" for="txtEmployeeName">Họ và tên <span class="required">*</span>:</label>
+                                    <input id="txtEmployeeName" property-name="EmployeeName" m-required field-label="Họ và tên nhân viên" type="text" class="input">
+                                    <!-- <div class="error-text" hidden>
                                         Họ và tên không được để trống
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -249,16 +249,16 @@
                             <div class="m-col w-100">
                                 <div class="input-wrapper">
                                     <label class="input__label">Đơn vị <span class="required">*</span>:</label>
-                                    <select class="combobox" name="department" id="cbxDepartment">
+                                    <select property-name="DepartmentId" class="combobox" m-required field-label="Đơn vị" name="department" id="cbxDepartment">
                                         <option value="">-- Chọn phòng ban --</option>
                                         <option value="142cb08f-7c31-21fa-8e90-67245e8b283e">Phòng nhân sự</option>
                                         <option value="17120d02-6ab5-3e43-18cb-66948daf6128">Phòng tuyển sinh</option>
                                         <option value="469b3ece-744a-45d5-957d-e8c757976496">Phòng sản xuất</option>
                                         <option value="4e272fc4-7875-78d6-7d32-6a1673ffca7c">Phòng đào tạo</option>
                                     </select>
-                                    <div class="error-text" hidden>
+                                    <!-- <div class="error-text" hidden>
                                         Đơn vị không được để trống
-                                    </div> 
+                                    </div>  -->
                                 </div>                        
                             </div>
                         </div>
@@ -266,7 +266,7 @@
                             <div class="m-col w-100">
                                 <div class="input-wrapper">
                                     <label class="input__label">Chức danh:</label>
-                                    <input id="txtPositionName" type="text" class="input">
+                                    <input id="txtPositionName" property-name="PositionName" type="text" class="input">
                                 </div>
                             </div>
                         </div>
@@ -276,7 +276,7 @@
                             <div class="m-col">
                                 <div class="input-wrapper">
                                     <label class="input__label" for="dtDateOfBirth">Ngày sinh:</label>
-                                    <input id="dtDateOfBirth" type="date" class="input">
+                                    <input id="dtDateOfBirth" property-name="DateOfBirth" m-required field-label="Ngày sinh nhân viên" type="date" class="input">
                                 </div>
                             </div>
                             <div class="m-col">
@@ -350,7 +350,7 @@
                         <div class="m-col">
                             <div class="input-wrapper">
                                 <label class="input__label" title="Email">Email : </label>
-                                <input id="txtEmail" type="text" class="input">
+                                <input id="txtEmail" property-name="Email" m-required field-label="Email nhân viên" type="text" class="input">
                                 <div class="error-text" hidden>
                                     Email không đúng định dạng
                                 </div>
